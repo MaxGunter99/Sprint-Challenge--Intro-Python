@@ -14,20 +14,66 @@
 #
 # Note that the first line of the CSV is header that describes the fields--this
 # should not be loaded into a City object.
+
+import csv
+
+class City:
+  def __init__( self , name , lat , lon ):
+    self.name = name
+    self.lat = lat
+    self.lon = lon
+
 cities = []
 
 def cityreader(cities=[]):
   # TODO Implement the functionality to read from the 'cities.csv' file
   # For each city record, create a new City instance and add it to the 
   # `cities` list
+
+  with open( "cities.csv" , newline="" ) as csvfile:
+
+    city_reader = csv.reader( csvfile , delimiter=" " , quoting = csv.QUOTE_NONE )
+
+    for row in city_reader:
+
+      # print( row )
+
+      # cities come back in this format: 
+      # [0] name,
+      # [1] state
+      # [2] area
+      # [3] lat?
+      # [4] lon
+      # [5] a big number
+      # [6] a smaller number
+      # [7] time zone
+      # [8] zip codes?
+      # [9] NONE
+      
+      all_info = ' '.join( row )
+      all_info_array = all_info.split( "," )
+      name = all_info_array[0]
+      lat = all_info_array[3]
+      lon = all_info_array[4]
+
+      #NEEDS TO BE THIS FORMAT: City( "Orlando" , 28.4801 , -81.3448 )
+      print( f"{name} , {lat} , {lon}" )
+
+      if name != "city":
+        city = City( str(name) , float(lat) , float(lon) )
+        cities.append( city )
     
     return cities
 
 cityreader(cities)
 
 # Print the list of cities (name, lat, lon), 1 record per line.
+
 for c in cities:
     print(c)
+
+# RUN IN TERMINAL | python3 cityreader.py |
+# FOR TESTING | python3 test_cityreader.py |
 
 # STRETCH GOAL!
 #
