@@ -93,11 +93,10 @@ print("Names and ages between 27 and 32:")
 f = []
 
 for i in humans:
+    name = i.name
+    age = i.age
     if i.age in range( 27 , 33 ):
-        # Person = ( 'name' , 'age' )
-        individual = ( i.name , i.age )
-        print( type( individual ) )
-        f.append(individual)
+        f.append( ( name , age) )
 
 print(f)
 
@@ -106,10 +105,12 @@ print(f)
 # The "humans" list should be unmodified.
 
 print("All names uppercase:")
+
 g = []
 
 for i in humans:
-    newhuman = i.name.upper() , i.age + 5
+
+    newhuman =  Human((i.name).upper() , ( i.age + 5))
     g.append( newhuman )
 
 print(g)
